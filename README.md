@@ -8,8 +8,9 @@ Each technique lives under `techniques/` with its own benchmark code and a READM
 
 | Technique | Topic | Key Takeaway | Typical Speedup |
 |-----------|-------|--------------|-----------------|
-| [false_sharing](techniques/false_sharing/) | Cache coherency | Pad per-thread data to 64B cache line | 5–10x |
-| [branch_prediction](techniques/branch_prediction/) | CPU pipeline | Sort data or use branchless ops | 3–8x |
+| [false_sharing](techniques/false_sharing/) | Cache coherency | Pad per-thread data to 64B cache line | ~13x |
+| [branch_prediction](techniques/branch_prediction/) | CPU pipeline | Go branchless; sort only helps on x86 | ~2x (ARM), ~8x (x86) |
+| [small_data_lookup](techniques/small_data_lookup/) | Data structure selection | HashMap beats linear/binary for int keys at all small N | flat ~2ns vs O(N) |
 
 ## Build
 
