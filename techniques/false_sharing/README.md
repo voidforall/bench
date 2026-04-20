@@ -18,12 +18,21 @@ cmake --build build -j --target bench_false_sharing
 
 ## Results
 
-> Fill in after running on your machine. See `docs/hardware.md` for the template.
+```
+CPU:      Apple M1 Pro (8 physical cores)
+L1d:      64 KiB  L2: 4096 KiB  L3: N/A (unified L2)
+OS:       macOS 15.7.4
+Compiler: Homebrew clang 20.1.8
+Flags:    -O2 -march=native
+Threads:  4  Iterations per thread: 10,000,000
+Date:     2026-04-20
+```
 
-| Benchmark        | Time (ms) | Notes                        |
-|------------------|-----------|------------------------------|
-| BM_FalseSharing  | ???       | 4 threads, packed counters   |
-| BM_NoFalseSharing| ???       | 4 threads, 64B padded        |
+| Benchmark         | Median (ms) | Notes                      |
+|-------------------|-------------|----------------------------|
+| BM_FalseSharing   | 588         | 4 threads, packed counters |
+| BM_NoFalseSharing | 43.9        | 4 threads, 64B padded      |
+| **Speedup**       | **~13x**    |                            |
 
 ## Conclusion / Takeaway
 

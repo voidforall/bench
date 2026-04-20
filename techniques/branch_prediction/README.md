@@ -20,13 +20,24 @@ Use `perf stat -e branch-misses` to see misprediction rates directly.
 
 ## Results
 
-> Fill in after running on your machine. See `docs/hardware.md` for the template.
+```
+CPU:      Apple M1 Pro (8 physical cores)
+L1d:      64 KiB  L2: 4096 KiB  L3: N/A (unified L2)
+OS:       macOS 15.7.4
+Compiler: Homebrew clang 20.1.8
+Flags:    -O2 -march=native
+Array:    65,536 int elements
+Date:     2026-04-20
+```
 
-| Benchmark        | Time (ns/iter) | Items/s | Notes               |
-|------------------|----------------|---------|---------------------|
-| BM_UnsortedSum   | ???            | ???     | ~50% misprediction  |
-| BM_SortedSum     | ???            | ???     | predictor succeeds  |
-| BM_BranchlessSum | ???            | ???     | cmov, no branch     |
+| Benchmark        | Median (ns) | Throughput     | Notes                                        |
+|------------------|-------------|----------------|----------------------------------------------|
+| BM_UnsortedSum   | 64,020      | 1.03 G items/s | shuffled; ARM predictor handles it well      |
+| BM_SortedSum     | 64,187      | 1.03 G items/s | sorted; ≈ same as unsorted on M1             |
+| BM_BranchlessSum | 34,030      | 1.96 G items/s | `x * (x > threshold)`; auto-vectorized       |
+| **Speedup**      | **~1.9x**   |                | branchless vs unsorted                       |
+
+> **Note (Apple Silicon):** On M1/M2 the branch predictor is strong enough that sorted ≈ unsorted for this 50/50 pattern. The branchless version still wins ~2x because clang vectorizes `int * bool` into SIMD. On x86 with a weaker predictor, sorted typically beats unsorted by 3–8x.
 
 ## Conclusion / Takeaway
 
