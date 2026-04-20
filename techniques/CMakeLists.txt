@@ -1,0 +1,6 @@
+file(GLOB technique_dirs RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *)
+foreach(dir ${technique_dirs})
+  if(IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${dir})
+    add_subdirectory(${dir})
+  endif()
+endforeach()
