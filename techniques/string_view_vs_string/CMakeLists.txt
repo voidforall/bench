@@ -1,0 +1,3 @@
+add_executable(bench_string_view_vs_string bench.cpp)
+target_link_libraries(bench_string_view_vs_string benchmark::benchmark)
+target_compile_options(bench_string_view_vs_string PRIVATE -O2 -march=native)

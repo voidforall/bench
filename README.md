@@ -11,6 +11,7 @@ Each technique lives under `techniques/` with its own benchmark code and a READM
 | [false_sharing](techniques/false_sharing/) | Cache coherency | Pad per-thread data to 64B cache line | ~13x |
 | [branch_prediction](techniques/branch_prediction/) | CPU pipeline | Go branchless; sort only helps on x86 | ~2x (ARM), ~8x (x86) |
 | [small_data_lookup](techniques/small_data_lookup/) | Data structure selection | HashMap beats linear/binary for int keys at all small N | flat ~2ns vs O(N) |
+| [string_view_vs_string](techniques/string_view_vs_string/) | Allocation elimination | Use string_view for read-only params; substr is free | 15–160x (pass), 65x (substr) |
 
 ## Build
 
