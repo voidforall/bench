@@ -14,6 +14,7 @@ Each technique lives under `techniques/` with its own benchmark code and a READM
 | [string_view_vs_string](techniques/string_view_vs_string/) | Allocation elimination | Use string_view for read-only params; substr is free | 15–160x (pass), 65x (substr) |
 | [slowpath_removal](techniques/slowpath_removal/) | Code layout / I-cache | Accumulate error flags + noinline handlers; single hot-path branch | ~1.18x |
 | [template_vs_branch](techniques/template_vs_branch/) | Compile-time dispatch | noinline helpers expose real cost: template saves ~6 instructions/call vs branching's eager-eval-both-paths | 1.15x (homogeneous), 1.44x (mixed) |
+| [denormalized_lookup](techniques/denormalized_lookup/) | Data layout | Inline the joined field — skip the dependent load; flat ~1.25 ns/op vs normalized's degradation past L2 | 1.5x at 32 MiB working set |
 
 ## Build
 
