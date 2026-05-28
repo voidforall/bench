@@ -12,6 +12,8 @@ Each technique lives under `techniques/` with its own benchmark code and a READM
 | [branch_prediction](techniques/branch_prediction/) | CPU pipeline | Go branchless; sort only helps on x86 | ~2x (ARM), ~8x (x86) |
 | [small_data_lookup](techniques/small_data_lookup/) | Data structure selection | HashMap beats linear/binary for int keys at all small N | flat ~2ns vs O(N) |
 | [string_view_vs_string](techniques/string_view_vs_string/) | Allocation elimination | Use string_view for read-only params; substr is free | 15–160x (pass), 65x (substr) |
+| [slowpath_removal](techniques/slowpath_removal/) | Code layout / I-cache | Accumulate error flags + noinline handlers; single hot-path branch | ~1.18x |
+| [template_vs_branch](techniques/template_vs_branch/) | Compile-time dispatch | Templates help on x86; on ARM fcsel makes branches free (mixed stream can be slower) | ≈neutral (ARM) |
 
 ## Build
 
